@@ -1,0 +1,20 @@
+attribute vec4 p;
+attribute vec3 colorzz;
+
+uniform vec4 light_pos;
+varying vec4 out_color;
+
+
+void main(void)
+{
+	out_color = vec4(1,1,1, 0.8);
+
+	vec4 pos;
+	if (light_pos.w == 1.0) {
+		pos = gl_Vertex.w * light_pos + vec4(gl_Vertex.x - light_pos.x, gl_Vertex.y - light_pos.y, gl_Vertex.z - light_pos.z, 0);
+	 } else {
+		pos = gl_Vertex.w  * (gl_Vertex + light_pos) - light_pos;
+	}
+	gl_Position = gl_ModelViewProjectionMatrix * pos;
+}
+
