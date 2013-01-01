@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include <iostream>
 using std::endl;
 using std::cout;

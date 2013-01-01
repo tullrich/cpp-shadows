@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "md3_mesh.h"
 
 MD3Mesh::MD3Mesh()

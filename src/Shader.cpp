@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "Shader.h"
 #include "shaderutils.h"
 
@@ -89,4 +91,12 @@ void ShaderProgram::setUniform4f(const char* name, float v1, float v2, float v3,
     activate();
 	int index = glGetUniformLocation(program , name);
 	glUniform4f(index, v1, v2, v3, v4);
+}
+
+void ShaderProgram::setUniform1i(const char* name, int v1)
+{
+    activate();
+	int index = glGetUniformLocation(program , name);
+	glUniform1i(index, v1);
+	cout << "uniform1i " << v1 << " " << glGetError() << endl;
 }

@@ -15,7 +15,7 @@ public:
 	int activate();
 	int getAttributeIndex(const char *name);
 	void setUniform4f(const char* name, float v1, float v2, float v3, float v4);
-
+	void setUniform1i(const char* name, int v1);
 	GLuint program;
 private:
 	/* GL handles*/

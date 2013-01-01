@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "MeshRenderable.h"
 
 MeshRenderable::MeshRenderable(Mesh *mesh, glm::vec3 position, float scale_factor) : m_mesh(mesh)

@@ -1,8 +1,8 @@
 #ifndef _MD3_MESH_H
 #define _MD3_MESH_H
 #include "md3_structs.h"
-#include "md3_surface.h"
 #include "shadows-common.h"
+#include "md3_surface.h"
 
 class MD3Mesh : public Mesh
 {

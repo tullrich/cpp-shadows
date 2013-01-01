@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "md3_surface.h"
 #include <GL/gl.h>
 

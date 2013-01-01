@@ -1,9 +1,8 @@
 #ifndef _MD3_SURFACE_H
 #define _MD3_SURFACE_H
 #include "md3_structs.h"
-#include <list>
+#include "texture_structs.h"
 
-#include "shadows-common.h"
 
 class MD3Surface {
 public:

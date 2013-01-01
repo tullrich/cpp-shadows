@@ -2,15 +2,11 @@
 #define _CUBE_MESH_H
 #include <glm/glm.hpp>
 
-
-
 #include "shadows-common.h"
 #include "md3_mesh.h"
 
 #define NUM_VERTS 8
 #define NUM_TRIS 12
-
-
 
 class CubeMesh : public Mesh
 {

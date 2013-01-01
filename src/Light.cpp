@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "Light.h"
 #include "CubeMesh.h"
 #include "GL/glu.h"

@@ -1,9 +1,10 @@
 #ifndef _R_ENGINE_H
 #define _R_ENGINE_H
 
+#include "shadows-common.h"
+
 #include <set>
 
-#include "shadows-common.h"
 #include "Light.h"
 #include "GlCanvas.h"
 #include "md3_reader.h"
@@ -21,7 +22,6 @@ public:
 	void init();
 
 	void addMd3FromFile(const char* filepath);
-	void addClassMeshFromFile(const char* filepath);
 	void addRenderEntity(Renderable& r);
 	void mouseDown(int x, int y);
 	void mouseDrag(int x, int y);

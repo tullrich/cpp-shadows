@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "PlaneMesh.h"
 
 md3_vertex PlaneMesh::verts[] =  

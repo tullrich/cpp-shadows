@@ -11,6 +11,8 @@ varying vec4 out_color;
 
 uniform vec4 light_pos;
 
+uniform sampler2D diff_texture;
+
 void main(void)
 {
     vec3 vertex_normal = normalize(gl_NormalMatrix * normalzz.xyz);
@@ -21,7 +23,6 @@ void main(void)
 
 	// global and light source ambient
 	vec4 ambient_color = amb_in * gl_LightSource[0].ambient + gl_LightModel.ambient * amb_in;
-
 	// light source diffuse
 	vec4 diffuse_color = diff_in * gl_LightSource[0].diffuse * max(dot(L,vertex_normal),0.0);
 	// light source specular

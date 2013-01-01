@@ -1,3 +1,5 @@
+#include "shadows-common.h" /* pch */
+
 #include "stdio.h"
 #include <iostream>
 #include <sys/types.h>
@@ -27,7 +29,7 @@ tImage* TextureManager::_allocateTexture(string path) {
 		(
 			path.c_str(),
 			&width, &height, &channels,
-			SOIL_LOAD_AUTO
+			SOIL_LOAD_RGBA
 		);
 
 	img->height = height;
@@ -100,7 +102,7 @@ tImage* TextureManager::registerTexture(string path)
 			img = _allocateTexture(forced_ext);
 		}
 	} else {
-		std::cout << "\tunsupported shader type " << path << std::endl;
+		std::cout << "\tunsupported texture type " << path << std::endl;
 	}
 
 	if (img == NULL)

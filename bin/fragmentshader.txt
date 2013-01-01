@@ -1,9 +1,13 @@
 varying vec4 out_color;
 
+
+uniform sampler2D diff_texture;
+
 void main (void)  
 {   
+	vec4 diff_map = texture2D(diff_texture, vec2(.246, .445)); 
 	if(gl_FrontFacing)
-		gl_FragColor = out_color;  
+		gl_FragColor = diff_map;  
 	else
 		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }    

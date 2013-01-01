@@ -56,16 +56,19 @@ typedef struct
 typedef std::unordered_map<string, EdgeRecord> EdgeMap;
 
 
+#include "texture_structs.h"
+
 #include "VirtualArrayObject.h"
 #include "BufferObject.h"
+#include "TextureObject.h"
 
 #include "Renderable.h"
 #include "Mesh.h"
 #include "MeshRenderable.h"
 #include "Shader.h"
 
-#include "texture_structs.h"
 #include "TextureManager.h"
+#include "TexturedMesh.h"
 
 
 #define SHADOW_LOG_ERROR(x) cout << "ERROR: " << x << endl;

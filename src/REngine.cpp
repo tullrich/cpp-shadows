@@ -1,9 +1,10 @@
+#include "shadows-common.h" /* pch */
+
 #include "REngine.h"
 #include "GL/glew.h"
 #include "GL/glu.h"
 #include "md3_mesh.h"
 #include "PlaneMesh.h"
-#include "ClassMesh.h"
 
 
 int SHADER_POS = -1;
@@ -123,9 +124,8 @@ void REngine::onDraw()
   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   //c.lookAt();
   glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  cout << " my znear " << m_znear << endl;
-  gluPerspective(m_fov, w()/h(), m_znear, m_zfar);
+  glLoadIdentity()
+;  gluPerspective(m_fov, w()/h(), m_znear, m_zfar);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -192,16 +192,6 @@ void REngine::checkError()
   }
 }
 
-void REngine::addClassMeshFromFile(const char* filepath)
-{
-  /*Model model = readModel(filepath);
-
-  ClassMesh *mesh = new ClassMesh(model);
-
-  MeshRenderable *renderEntity = new MeshRenderable(mesh);
-  renderEntity->castsShadows = true;
-  addRenderEntity(*renderEntity);*/
-}
 
 void REngine::addMd3FromFile(const char* filepath)
 {
@@ -257,6 +247,8 @@ void REngine::init()
   SHADER_SPEC =  renderProgram.getAttributeIndex("spec_in");
   SHADER_SHINE =  renderProgram.getAttributeIndex("shine_in");
 
+  renderProgram.setUniform1i("diff_texture", 0);
+
 
   cube = new CubeMesh();
   block1 = new MeshRenderable(cube,
@@ -270,15 +262,13 @@ void REngine::init()
   addRenderEntity(*floor);
 
 
+  MeshRenderable &textured = *new MeshRenderable(new TexturedMesh("uvmaps/texture_4.png"));
+  addRenderEntity(textured);
+
   light1 = new Light(1000, 1000, 400, true);
   addRenderEntity(*light1);
 
   c.place();
-  //c.place(Vector(500.0, 500.0, 500.0), Vector(-500.0, -500.0, -500.0), w(), h());
-  //c.znear = 190;
-  // bc.zfar = 9000;
-
-
 }
 
 void REngine::mouseDown(int x, int y)
