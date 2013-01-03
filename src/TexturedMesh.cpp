@@ -7,7 +7,7 @@
  	m_diffmap = tm.registerTexture(uvmap_path);
 
  	std::cout << "ERR1 " << glGetError() << std::endl;
- 	m_diffTO.uploadImage3D(*m_diffmap);
+ 	m_diffTO.uploadImageCubeMap(*m_diffmap);
  	std::cout << "ERR2 " << glGetError() << std::endl;
  }
 
@@ -20,4 +20,5 @@
  {
  	m_diffTO.bind();
  	CubeMesh::render();
+ 	m_diffTO.unbind();
  }

@@ -5,11 +5,13 @@
 
 md3_vertex CubeMesh::verts[] =  
 	{
+		/* top */
 		{200, 200, 200},
 		{-200, 200, 200},
 		{200, 200, -200},
 		{-200, 200, -200},
 
+		/* bottom */
 		{200, -200, 200},
 		{-200, -200, 200},
 		{200, -200, -200},
@@ -17,11 +19,28 @@ md3_vertex CubeMesh::verts[] =
 	};
 
 
+GLfloat CubeMesh::texcoords[][3] =  
+	{
+		/* top */
+		{1.0, 1.0, 1.0},
+		{-1.0, 1.0, 1.0},
+		{1.0, 1.0, -1.0},
+		{-1.0, 1.0, -1.0},
+
+		/* bottom  */
+		{1.0, -1.0, 1.0},
+		{-1.0, -1.0, 1.0},
+		{1.0, -1.0, -1.0},
+		{-1.0, -1.0, -1.0},
+	};
+
 
 GLuint CubeMesh::triangles[][3] = 
 {
+	/* top */
 	{2, 1, 0},
 	{1, 2, 3},
+
 
 	{0, 6, 2},
 	{6, 0, 4},
@@ -73,7 +92,7 @@ CubeMesh::CubeMesh()
 	m_BO.setData(NUM_VERTS * sizeof(md3_vertex), verts);
 	m_normalBO.setData(NUM_TRIS * sizeof(GLfloat) * 3, NULL);
 	m_colorBO.setData(NUM_VERTS * sizeof(GLfloat) * 3, colors);
-
+	m_texcoBO.setData(NUM_VERTS * sizeof(GLfloat) * 3, texcoords);
 
 	
 	m_VAO.bindAttribToBuffer(SHADER_POS, GL_SHORT, sizeof(md3_vertex), m_BO);
@@ -81,6 +100,7 @@ CubeMesh::CubeMesh()
 	m_VAO.bindAttribToBuffer(SHADER_AMB, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
 	m_VAO.bindAttribToBuffer(SHADER_DIFF, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
 	m_VAO.bindAttribToBuffer(SHADER_SPEC, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
+	m_VAO.bindAttribToBuffer(SHADER_TC, GL_FLOAT, sizeof(GLfloat) * 3, m_texcoBO);
 	
 	m_silhouetteVAO.bindAttribToBuffer(SHADER_POS, GL_SHORT, sizeof(md3_vertex), m_BO);
 

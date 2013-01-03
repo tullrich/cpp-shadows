@@ -10,6 +10,8 @@
 int SHADER_POS = -1;
 int SHADER_COLOR = -1;
 int SHADER_NORMAL = -1;
+int SHADER_TC = -1;
+
 int SHADER_AMB = -1;
 int SHADER_DIFF = -1;
 int SHADER_SPEC = -1;
@@ -212,6 +214,7 @@ void REngine::init()
   /* general */
 	glEnable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
+  //glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
   glDepthFunc(GL_LESS);
   glCullFace(GL_BACK);
 
@@ -242,10 +245,13 @@ void REngine::init()
   SHADER_POS = renderProgram.getAttributeIndex("positionzz");
   SHADER_COLOR =  renderProgram.getAttributeIndex("colorzz");
   SHADER_NORMAL =  renderProgram.getAttributeIndex("normalzz");
+  SHADER_TC = renderProgram.getAttributeIndex("texcoords");
   SHADER_AMB =  renderProgram.getAttributeIndex("amb_in");
   SHADER_DIFF =  renderProgram.getAttributeIndex("diff_in");
   SHADER_SPEC =  renderProgram.getAttributeIndex("spec_in");
   SHADER_SHINE =  renderProgram.getAttributeIndex("shine_in");
+
+  cout << "shader tc " << SHADER_TC << endl;
 
   renderProgram.setUniform1i("diff_texture", 0);
 

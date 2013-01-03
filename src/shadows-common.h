@@ -20,6 +20,7 @@ using std::cout;
 extern int SHADER_POS;
 extern int SHADER_COLOR;
 extern int SHADER_NORMAL;
+extern int SHADER_TC;
 extern int SHADER_AMB;
 extern int SHADER_DIFF;
 extern int SHADER_SPEC;

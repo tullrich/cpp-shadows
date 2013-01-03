@@ -1,6 +1,7 @@
 attribute vec3 positionzz;
 attribute vec3 colorzz;
 attribute vec4 normalzz;
+attribute vec3 texcoords;
 
 attribute vec4 amb_in;
 attribute vec4 diff_in;
@@ -8,10 +9,9 @@ attribute vec4 spec_in;
 attribute float shine_in;
 
 varying vec4 out_color;
+varying vec3 out_tc;
 
 uniform vec4 light_pos;
-
-uniform sampler2D diff_texture;
 
 void main(void)
 {
@@ -28,7 +28,7 @@ void main(void)
 	// light source specular
 	vec4 specular_color = spec_in * gl_LightSource[0].specular * pow(max(dot(R, E),0.0), shine_in);
 
-
+	out_tc = texcoords;
 	out_color = ambient_color + diffuse_color + specular_color;
 
 	gl_Position = gl_ModelViewProjectionMatrix * vec4(positionzz, 1.0);

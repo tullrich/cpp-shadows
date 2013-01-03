@@ -9,8 +9,10 @@ public:
 	TextureObject();
 	~TextureObject();
 
-	void uploadImage3D(tImage &img);
+	void uploadImage2D(tImage &img);
+	void uploadImageCubeMap(tImage &img);
 	void bind();
+	void unbind();
 private:
 	GLuint name, sname;
 };

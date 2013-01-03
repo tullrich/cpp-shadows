@@ -20,7 +20,7 @@ public:
 	void onDrawSilhouette(glm::vec4 light_pos);
 	void onDrawShadowVolumes(glm::vec4 light_pos);
 	
-	BufferObject m_colorBO, m_BO, m_normalBO;
+	BufferObject m_colorBO, m_BO, m_normalBO, m_texcoBO;
 	VirtualArrayObject m_VAO, m_silhouetteVAO;
 	GLfloat colors[NUM_VERTS][3];
 private:
@@ -31,6 +31,7 @@ private:
 
 
 	static md3_vertex verts[NUM_VERTS];
+	static GLfloat texcoords[NUM_VERTS][3];
 	static GLuint triangles[NUM_TRIS][3];
 	static GLfloat normals[NUM_TRIS][3];
 	static glm::vec4 normalKs[NUM_TRIS];

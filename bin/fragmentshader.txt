@@ -1,13 +1,13 @@
 varying vec4 out_color;
+varying vec3 out_tc;
 
-
-uniform sampler2D diff_texture;
+uniform samplerCube diff_texture;
 
 void main (void)  
 {   
-	vec4 diff_map = texture2D(diff_texture, vec2(.246, .445)); 
+	vec4 diff_map = textureCube(diff_texture, out_tc); 
 	if(gl_FrontFacing)
 		gl_FragColor = diff_map;  
 	else
-		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		gl_FragColor = diff_map;
 }    
