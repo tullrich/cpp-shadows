@@ -54,7 +54,7 @@ void TextureObject::uploadImageCubeMap(tImage &img)
 
 void TextureObject::bind()
 {
-	glBindTexture(GL_TEXTURE_CUBE_MAP, name);
+	glBindTexture(GL_TEXTURE_2D, name);
 	glBindSampler(0, sname);
 }
 

@@ -1,13 +1,25 @@
-varying vec4 out_color;
+
 varying vec3 out_tc;
+
+varying vec4 out_diffuse;
+varying vec4 out_specular;
 
 uniform samplerCube diff_texture;
 
 void main (void)  
 {   
-	vec4 diff_map = textureCube(diff_texture, out_tc); 
+
+
+
+	vec4 diff_color = textureCube(diff_texture, out_tc); 
+
+
+	diff_color = out_diffuse * diff_color;
+
+	vec4 final_color = diff_color + out_specular;
+
 	if(gl_FrontFacing)
-		gl_FragColor = diff_map;  
+		gl_FragColor = final_color;  
 	else
-		gl_FragColor = diff_map;
+		gl_FragColor = final_color;
 }    

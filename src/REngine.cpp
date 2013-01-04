@@ -268,7 +268,8 @@ void REngine::init()
   addRenderEntity(*floor);
 
 
-  MeshRenderable &textured = *new MeshRenderable(new TexturedMesh("uvmaps/texture_4.png"));
+  MeshRenderable &textured = *new MeshRenderable(
+    new TexturedMesh("uvmaps/texture_4.png", "uvmaps/normal_4.png"));
   addRenderEntity(textured);
 
   light1 = new Light(1000, 1000, 400, true);

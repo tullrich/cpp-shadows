@@ -15,7 +15,7 @@ public:
 	CubeMesh();
 	~CubeMesh();
 
-	int inflate();
+	virtual int inflate();
 	void render();
 	void onDrawSilhouette(glm::vec4 light_pos);
 	void onDrawShadowVolumes(glm::vec4 light_pos);
@@ -29,7 +29,7 @@ private:
 	void renderPointLightQuads(glm::vec4 light_pos);
 	void renderInfiniteLightTris(glm::vec4 light_pos);
 
-
+protected:
 	static md3_vertex verts[NUM_VERTS];
 	static GLfloat texcoords[NUM_VERTS][3];
 	static GLuint triangles[NUM_TRIS][3];

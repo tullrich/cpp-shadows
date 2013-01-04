@@ -8,8 +8,10 @@ attribute vec4 diff_in;
 attribute vec4 spec_in;
 attribute float shine_in;
 
-varying vec4 out_color;
 varying vec3 out_tc;
+
+varying vec4 out_diffuse;
+varying vec4 out_specular;
 
 uniform vec4 light_pos;
 
@@ -22,14 +24,14 @@ void main(void)
 	vec3 R = normalize( 2.0 * dot(L,vertex_normal) * vertex_normal - L );
 
 	// global and light source ambient
-	vec4 ambient_color = amb_in * gl_LightSource[0].ambient + gl_LightModel.ambient * amb_in;
+	out_diffuse = gl_LightSource[0].ambient + gl_LightModel.ambient;
 	// light source diffuse
-	vec4 diffuse_color = diff_in * gl_LightSource[0].diffuse * max(dot(L,vertex_normal),0.0);
+	out_diffuse += gl_LightSource[0].diffuse * max(dot(L,vertex_normal),0.0);
+
 	// light source specular
-	vec4 specular_color = spec_in * gl_LightSource[0].specular * pow(max(dot(R, E),0.0), shine_in);
+	out_specular = vec4(1,1,1,14) * gl_LightSource[0].specular * pow(max(dot(R, E),0.0), shine_in);
 
 	out_tc = texcoords;
-	out_color = ambient_color + diffuse_color + specular_color;
 
 	gl_Position = gl_ModelViewProjectionMatrix * vec4(positionzz, 1.0);
 }
