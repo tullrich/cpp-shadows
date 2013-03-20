@@ -11,6 +11,7 @@ int SHADER_POS = -1;
 int SHADER_COLOR = -1;
 int SHADER_NORMAL = -1;
 int SHADER_TC = -1;
+int SHADER_TANGENT = -1;
 
 int SHADER_AMB = -1;
 int SHADER_DIFF = -1;
@@ -49,10 +50,13 @@ void REngine::drawPass()
   renderProgram.setUniform4f("light_pos", 
     light1_pos.x, light1_pos.y, light1_pos.z, light1_pos.w);
 
+  glm::vec3 view_pos = c.getWorldPosition();
+  cout << "view_pos: " << view_pos.x << ", " << view_pos.y << ", " << view_pos.z << endl;
+
 
   for (auto i = entities.begin(); i != entities.end(); i++)
   {
-    (*i)->onDraw();
+    (*i)->onDraw(view_pos, light1_pos, renderProgram);
   }
 }
 
@@ -133,7 +137,9 @@ void REngine::onDraw()
   glLoadIdentity();
   c.setupModelView();
 
-  light1->deactivate();
+  light1->activate();
+  //GLfloat global_ambient[] = { 0 , 0, 0 , 1.0};
+  //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 
   if(m_RenderScene)
   {
@@ -179,7 +185,7 @@ void REngine::onDraw()
   }
 
 
-  depthPass();
+  //depthPass();
 
   /* catchall error check */
   checkError();
@@ -246,14 +252,17 @@ void REngine::init()
   SHADER_COLOR =  renderProgram.getAttributeIndex("colorzz");
   SHADER_NORMAL =  renderProgram.getAttributeIndex("normalzz");
   SHADER_TC = renderProgram.getAttributeIndex("texcoords");
+  SHADER_TANGENT = renderProgram.getAttributeIndex("tangent");
   SHADER_AMB =  renderProgram.getAttributeIndex("amb_in");
   SHADER_DIFF =  renderProgram.getAttributeIndex("diff_in");
   SHADER_SPEC =  renderProgram.getAttributeIndex("spec_in");
   SHADER_SHINE =  renderProgram.getAttributeIndex("shine_in");
 
-  cout << "shader tc " << SHADER_TC << endl;
+  cout << "SHADER_TANGENT" << SHADER_TANGENT << endl;
 
   renderProgram.setUniform1i("diff_texture", 0);
+  renderProgram.setUniform1i("normal_texture", 1);
+  renderProgram.setUniform1i("spec_texture", 2);
 
 
   //cube = new CubeMesh();
@@ -264,12 +273,15 @@ void REngine::init()
 
 
   MeshRenderable *floor = new MeshRenderable(new PlaneMesh(), 
-    glm::vec3(0.0, -1500.0, 0.0));
+    glm::vec3(0.0, 0.0, 0.0));
   addRenderEntity(*floor);
 
 
   MeshRenderable &textured = *new MeshRenderable(
-    new TexturedMesh("uvmaps/temple-diffuse.png", "uvmaps/temple-normal.png", "uvmaps/temple-specular.png"));
+    new TexturedMesh(
+      "uvmaps/temple-diffuse.png", 
+      "uvmaps/temple-normal.png",
+      "uvmaps/temple-specular.png"));
   addRenderEntity(textured);
 
   light1 = new Light(1000, 1000, 400, true);
