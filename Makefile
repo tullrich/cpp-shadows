@@ -12,7 +12,7 @@ PROGRAM_NAME := shadows
 
 all: shadows
 
-shadows: $(_OBJECTS) $(_PCHS)
+shadows: $(_OBJECTS)
 	$(CXX) -std=c++0x $(_OBJECTS) -o $(BUILD_DIR)$(PROGRAM_NAME) $(shell fltk-config --use-gl --ldflags) -lGLEW -lSOIL
 
 src/%.o: src/%.cpp
