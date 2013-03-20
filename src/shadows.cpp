@@ -102,14 +102,14 @@ int main(int argc, char **argv)
   slider_g = new Fl_Pack(5, 5, 190, 90);
 
   light_x = new Fl_Hor_Value_Slider(5, 5, 190, 25, "");
-  light_x->bounds(-5000, 5000);
+  light_x->bounds(-10000, 10000);
   light_x->value(1000);
   light_x->step(15);
   light_x->callback(xyz_callback);
   slider_g->add(light_x);
 
   light_y = new Fl_Hor_Value_Slider(5, 5, 190, 25, "");
-  light_y->bounds(-5000, 5000);
+  light_y->bounds(-10000, 10000);
   light_y->value(1000);
   light_y->step(15);
   light_y->callback(xyz_callback);
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 
 
   light_z = new Fl_Hor_Value_Slider(5, 5, 190, 25, "");
-  light_z->bounds(-5000, 5000);
+  light_z->bounds(-10000, 10000);
   light_z->value(400);
   light_z->step(15);
   light_z->callback(xyz_callback);

@@ -6,7 +6,7 @@
 #include <regex>
 #include "shadows-common.h"
 
-#define IMAGE_STR_REGEX ".*\.(PNG|png|TGA|tga|jpeg|JPEG|jpg|JPG|BMP|PCX)"
+#define IMAGE_STR_REGEX ".*"
 #define DEFAULT_IMG_EXT ".jpg"
 
 class TextureManager {

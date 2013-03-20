@@ -19,19 +19,19 @@ md3_vertex CubeMesh::verts[] =
 	};
 
 
-GLfloat CubeMesh::texcoords[][3] =  
+GLfloat CubeMesh::texcoords[][2] =  
 	{
 		/* top */
-		{1.0, 1.0, 1.0},
-		{-1.0, 1.0, 1.0},
-		{1.0, 1.0, -1.0},
-		{-1.0, 1.0, -1.0},
+		{0.0, 1.0},
+		{0.0, 0.0},
+		{1.0, 1.0},
+		{1.0, 0.0},
 
 		/* bottom  */
-		{1.0, -1.0, 1.0},
-		{-1.0, -1.0, 1.0},
-		{1.0, -1.0, -1.0},
-		{-1.0, -1.0, -1.0},
+		{0.0, 0.0},
+		{0.0, 1.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
 	};
 
 
@@ -58,7 +58,19 @@ GLuint CubeMesh::triangles[][3] =
 	{5, 6, 4}
 };
 
-GLfloat CubeMesh::normals[NUM_TRIS][3];
+GLfloat CubeMesh::normals[][3] =
+{
+	{1.0, 1.0, 1.0},
+	{-1.0, 1.0, 1.0},
+	{1.0, 1.0, -1.0},
+	{-1.0, 1.0, -1.0},
+
+	{1.0, -1.0, 1.0},
+	{-1.0, -1.0, 1.0},
+	{1.0, -1.0, -1.0},
+	{-1.0, -1.0, -1.0},
+};
+
 glm::vec4 CubeMesh::normalKs[NUM_TRIS];
 
 CubeMesh::CubeMesh()
@@ -90,17 +102,16 @@ CubeMesh::CubeMesh()
 	
 	
 	m_BO.setData(NUM_VERTS * sizeof(md3_vertex), verts);
-	m_normalBO.setData(NUM_TRIS * sizeof(GLfloat) * 3, NULL);
+	m_normalBO.setData(NUM_VERTS * sizeof(GLfloat) * 3, normals);
 	m_colorBO.setData(NUM_VERTS * sizeof(GLfloat) * 3, colors);
-	m_texcoBO.setData(NUM_VERTS * sizeof(GLfloat) * 3, texcoords);
+	m_texcoBO.setData(NUM_VERTS * sizeof(GLfloat) * 2, texcoords);
 
-	
 	m_VAO.bindAttribToBuffer(SHADER_POS, GL_SHORT, sizeof(md3_vertex), m_BO);
 	m_VAO.bindAttribToBuffer(SHADER_NORMAL, GL_FLOAT, sizeof(GLfloat) * 3, m_normalBO);
 	m_VAO.bindAttribToBuffer(SHADER_AMB, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
 	m_VAO.bindAttribToBuffer(SHADER_DIFF, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
 	m_VAO.bindAttribToBuffer(SHADER_SPEC, GL_FLOAT, sizeof(GLfloat) * 3, m_colorBO);
-	m_VAO.bindAttribToBuffer(SHADER_TC, GL_FLOAT, sizeof(GLfloat) * 3, m_texcoBO);
+	m_VAO.bindAttribToBuffer(SHADER_TC, GL_FLOAT, sizeof(GLfloat) * 2, m_texcoBO);
 	
 	m_silhouetteVAO.bindAttribToBuffer(SHADER_POS, GL_SHORT, sizeof(md3_vertex), m_BO);
 
@@ -114,7 +125,7 @@ int CubeMesh::inflate()
 		calculateNormalKs();
 
 
-		m_normalBO.setData(NUM_TRIS * sizeof(GLfloat) * 3, normals);
+		//m_normalBO.setData(NUM_TRIS * sizeof(GLfloat) * 3, normals);
 
 		m_isInflated = true;
 	}
@@ -236,9 +247,9 @@ void CubeMesh::calculateNormalKs()
 			verts[vertIndex3].coord[2]);
 		
 		N = glm::normalize( glm::cross((V2 - V1), (V3 - V1)));
-		normals[i][0] = N.x;
-		normals[i][1] = N.y;
-		normals[i][2] = N.z;
+		//normals[i][0] = N.x;
+		//normals[i][1] = N.y;
+		//normals[i][2] = N.z;
 		//cout << N.x << " " << N.y << " " << N.z << " "  << endl;
 
 

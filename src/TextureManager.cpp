@@ -102,6 +102,7 @@ tImage* TextureManager::registerTexture(string path)
 			img = _allocateTexture(forced_ext);
 		}
 	} else {
+		std::cout << "regex " << IMAGE_STR_REGEX << std::endl;
 		std::cout << "\tunsupported texture type " << path << std::endl;
 	}
 

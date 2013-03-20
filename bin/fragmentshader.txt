@@ -1,22 +1,32 @@
 
-varying vec3 out_tc;
+varying vec2 out_tc;
+varying vec3 out_L;
+varying vec3 out_H;
 
-varying vec4 out_diffuse;
-varying vec4 out_specular;
-
-uniform samplerCube diff_texture;
+uniform sampler2D diff_texture;
+uniform sampler2D normal_texture;
+uniform sampler2D spec_texture;
 
 void main (void)  
 {   
+	vec4 diff_color = texture2D(diff_texture, out_tc); 
+	vec4 spec_color = texture2D(spec_texture, out_tc); 
 
+	vec3 N_biased = vec3(texture2D(normal_texture, out_tc).xyz);
+	vec3 N = vec3(texture2D(normal_texture, out_tc).xyz) * 2.0 - 1.0;
 
+	vec3 L = normalize(out_L);
+	vec3 H = normalize(out_H);
 
-	vec4 diff_color = textureCube(diff_texture, out_tc); 
+	float diffFactor = max(dot(N, L), 0);
+	float specFactor = pow(max(dot(N, H), 0), spec_color.a);
 
+	vec4 amb_comp = diff_color * gl_LightSource[0].ambient;
+	vec4 diff_comp = diff_color * diffFactor * gl_LightSource[0].diffuse;
+	vec4 spec_comp = vec4(spec_color.rgb, 1) * specFactor * gl_LightSource[0].specular;
 
-	diff_color = out_diffuse * diff_color;
-
-	vec4 final_color = diff_color + out_specular;
+	vec4 final_color = diff_comp + amb_comp + spec_comp;
+	//vec4 final_color = vec4(H, 1.0);
 
 	if(gl_FrontFacing)
 		gl_FragColor = final_color;  

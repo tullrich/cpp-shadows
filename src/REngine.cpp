@@ -256,11 +256,11 @@ void REngine::init()
   renderProgram.setUniform1i("diff_texture", 0);
 
 
-  cube = new CubeMesh();
-  block1 = new MeshRenderable(cube,
-    glm::vec3(0.0, 400, 0.0), 1.0);
-  block1->castsShadows = true;
-  addRenderEntity(*block1);
+  //cube = new CubeMesh();
+  //block1 = new MeshRenderable(cube,
+  //  glm::vec3(0.0, 400, 0.0), 1.0);
+  //block1->castsShadows = true;
+  //addRenderEntity(*block1);
 
 
   MeshRenderable *floor = new MeshRenderable(new PlaneMesh(), 
@@ -269,7 +269,7 @@ void REngine::init()
 
 
   MeshRenderable &textured = *new MeshRenderable(
-    new TexturedMesh("uvmaps/texture_4.png", "uvmaps/normal_4.png"));
+    new TexturedMesh("uvmaps/temple-diffuse.png", "uvmaps/temple-normal.png", "uvmaps/temple-specular.png"));
   addRenderEntity(textured);
 
   light1 = new Light(1000, 1000, 400, true);

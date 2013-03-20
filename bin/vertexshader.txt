@@ -1,35 +1,41 @@
 attribute vec3 positionzz;
 attribute vec3 colorzz;
 attribute vec4 normalzz;
-attribute vec3 texcoords;
+attribute vec4 tangent;
+attribute vec2 texcoords;
 
 attribute vec4 amb_in;
 attribute vec4 diff_in;
 attribute vec4 spec_in;
 attribute float shine_in;
 
-varying vec3 out_tc;
-
-varying vec4 out_diffuse;
-varying vec4 out_specular;
+varying vec2 out_tc;
+varying vec3 out_L;
+varying vec3 out_H;
 
 uniform vec4 light_pos;
+uniform vec4 view_pos;
 
 void main(void)
 {
-    vec3 vertex_normal = normalize(gl_NormalMatrix * normalzz.xyz);
-	vec3 v = vec3(gl_ModelViewMatrix * vec4(positionzz, 1.0));
-	vec3 L = normalize(vec3(gl_ModelViewMatrix * light_pos)  - v); 
-	vec3 E = normalize(-v);
-	vec3 R = normalize( 2.0 * dot(L,vertex_normal) * vertex_normal - L );
+    vec3 vertex_normal = normalize(normalzz.xyz);
+	vec3 L = vec3(light_pos) - positionzz;
 
-	// global and light source ambient
-	out_diffuse = gl_LightSource[0].ambient + gl_LightModel.ambient;
-	// light source diffuse
-	out_diffuse += gl_LightSource[0].diffuse * max(dot(L,vertex_normal),0.0);
+	vec3 V = normalize(view_pos.xyz - positionzz);
+	vec3 H = normalize(V + normalize(L));
 
-	// light source specular
-	out_specular = vec4(1,1,1,14) * gl_LightSource[0].specular * pow(max(dot(R, E),0.0), shine_in);
+	vec4 tangeeent = vec4(0, 0, -1, -1);
+
+	vec3 binormal = cross(vertex_normal, tangeeent.xyz) * tangeeent.w;
+
+	//out_L = binormal.xyz;
+	out_L.x = dot(L, tangeeent.xyz);
+	out_L.y = dot(L, binormal);
+	out_L.z = dot(L, vertex_normal);
+
+	out_H.x = dot(H, tangeeent.xyz);
+	out_H.y = dot(H, binormal);
+	out_H.z = dot(H, vertex_normal);
 
 	out_tc = texcoords;
 

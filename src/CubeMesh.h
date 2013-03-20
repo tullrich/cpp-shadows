@@ -1,6 +1,5 @@
 #ifndef _CUBE_MESH_H
 #define _CUBE_MESH_H
-#include <glm/glm.hpp>
 
 #include "shadows-common.h"
 #include "md3_mesh.h"
@@ -31,9 +30,9 @@ private:
 
 protected:
 	static md3_vertex verts[NUM_VERTS];
-	static GLfloat texcoords[NUM_VERTS][3];
+	static GLfloat texcoords[NUM_VERTS][2];
 	static GLuint triangles[NUM_TRIS][3];
-	static GLfloat normals[NUM_TRIS][3];
+	static GLfloat normals[NUM_VERTS][3];
 	static glm::vec4 normalKs[NUM_TRIS];
 
 	EdgeMap m_edges;

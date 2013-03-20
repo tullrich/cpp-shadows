@@ -12,9 +12,10 @@ TextureObject::~TextureObject()
 	glDeleteSamplers(1, &sname);
 }
 
-void TextureObject::uploadImage2D(tImage &img)
+void TextureObject::uploadImage2D(GLuint index, tImage &img)
 {
-	glActiveTexture(GL_TEXTURE0 + 0);
+	m_index = index;
+	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, name);
 	glBindSampler(0, sname);
 
@@ -54,12 +55,13 @@ void TextureObject::uploadImageCubeMap(tImage &img)
 
 void TextureObject::bind()
 {
+	glActiveTexture(GL_TEXTURE0 + m_index);
 	glBindTexture(GL_TEXTURE_2D, name);
 	glBindSampler(0, sname);
 }
 
 void TextureObject::unbind()
 {
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindSampler(0, 0);
 }

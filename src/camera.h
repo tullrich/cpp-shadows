@@ -34,6 +34,8 @@ class Camera {
 				void rotateAboutCenter(int horizontalDeg, int verticalDeg);
 				void lookAt();
 
+				glm::vec3 getWorldPosition();
+
 				void perspectiveProjection();
 				void setupModelView();
 

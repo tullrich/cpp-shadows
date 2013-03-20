@@ -2,16 +2,16 @@ attribute vec4 p;
 attribute vec3 colorzz;
 
 uniform vec4 light_pos;
-varying vec3 out_tc;
+varying vec2 out_tc;
 
-varying vec4 out_diffuse;
-varying vec4 out_specular;
+varying vec3 out_L;
+varying vec3 out_H;
 
 void main(void)
 {
-	out_tc = vec3(0, 0, 0);
-	out_diffuse = vec4(0, 0, 1.0, 1.0);
-	out_specular = vec4(1.0, 0, 0.0, 1.0);
+	out_tc = vec2(0, 0);
+	out_L = vec3(0, 0, 1.0);
+	out_H = vec3(1.0, 0, 0.0);
 
 	vec4 pos;
 	if (light_pos.w == 1.0) {

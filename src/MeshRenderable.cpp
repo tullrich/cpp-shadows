@@ -14,11 +14,29 @@ MeshRenderable::~MeshRenderable()
 {
 }
 
-void MeshRenderable::onDraw()
+void MeshRenderable::onDraw(glm::vec3 view_pos, glm::vec4 light_pos, ShaderProgram &s)
 {
 	glPushMatrix();
 	glTranslated(position.x, position.y, position.z);
 	glScalef(m_scaleFactor, m_scaleFactor, m_scaleFactor);
+
+
+
+	glm::vec4 rel_light_pos = glm::vec4( 
+		light_pos.x - position.x, 
+		light_pos.y - position.y, 
+		light_pos.z - position.z, 
+		light_pos.w);
+
+	s.setUniform4f("light_pos", 
+    rel_light_pos.x, rel_light_pos.y, rel_light_pos.z, rel_light_pos.w);
+
+	glm::vec3 rel_view_pos = glm::vec3(
+		 view_pos.x - position.x,
+		 view_pos.y - position.y,
+		 view_pos.z - position.z);
+	s.setUniform4f("view_pos", rel_view_pos.x, rel_view_pos.y, rel_view_pos.z, 1);
+
 	m_mesh->render();
 	glPopMatrix();
 }

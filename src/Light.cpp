@@ -70,7 +70,7 @@ void Light::activate()
 	GLfloat diffuse[] = { 1.0f, 1.0f, 1.0f, position.w };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
 
-	GLfloat ambient[] = { 0, 0, 0, position.w};
+	GLfloat ambient[] = { .1, .1, .1, position.w};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 
 	GLfloat light_p[4];

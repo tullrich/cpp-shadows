@@ -1,4 +1,4 @@
-#include "shadows-common.h" /* pch */
+ #include "shadows-common.h" /* pch */
 
 #include "camera.h"
 
@@ -368,4 +368,23 @@ void Camera::drawSelf(Matrix topMatrix, GLuint matrixVar) {
 
 Matrix Camera::getModelViewProjectionMatrix() {
 	return projection * modelView;
+}
+
+glm::vec3 Camera::getWorldPosition()
+{
+	glm::vec3 world_pos;
+
+	world_pos.x = -modelView.vals[0] * modelView.vals[12] 
+		+ -modelView.vals[4] * modelView.vals[13]
+		+ -modelView.vals[8] * modelView.vals[14];
+
+	world_pos.y = -modelView.vals[1] * modelView.vals[12] 
+		+ -modelView.vals[5] * modelView.vals[13]
+		+ -modelView.vals[9] * modelView.vals[14];
+
+	world_pos.z = -modelView.vals[2] * modelView.vals[12] 
+		+ -modelView.vals[6] * modelView.vals[13]
+		+ -modelView.vals[10] * modelView.vals[14];
+
+	return world_pos;
 }

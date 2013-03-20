@@ -9,12 +9,13 @@ public:
 	TextureObject();
 	~TextureObject();
 
-	void uploadImage2D(tImage &img);
+	void uploadImage2D(GLuint index, tImage &img);
 	void uploadImageCubeMap(tImage &img);
 	void bind();
 	void unbind();
 private:
 	GLuint name, sname;
+	GLuint m_index;
 };
 
 #endif /* _TEXTURE_OBJECT_H */
