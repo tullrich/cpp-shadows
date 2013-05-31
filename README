@@ -1,5 +1,5 @@
-A cplusplus implementation of Depth-fail and Depth-pass stencil shadows done via gpu extrusion. Simply because I was fasinated by how it worked.
+A cplusplus implementation of Depth-fail and Depth-pass stencil shadows done via gpu extrusion. 
 
-Checkout the bump-mapping branch for an implementation of normal mapping from a normal map (the specular component is now also fetched from a distinct texture).
+git checkout the bump-mapping branch for an implementation of normal mapping.
 
-The original lighting modal was realtime blinn-phong.
+The shading modal was realtime blinn-phong.
